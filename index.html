@@ -70,11 +70,26 @@ var dg = {
 	score_mode : 0, 
 	// 0= overpar, 
 	// 1= actual score (add par)
-	tpl : "<",
-	display : function (date,course,overpar) {
-		if (date === "all" && course === "all") {
+	tpl : ["
+			<table id='scores'>\r\n<tr>\r\n<th>Player</th>\r\n<th>Date</th>\r\n<th>Course</th>\r\n<th>{{c1}}</th>\r\n<th>{{c2}}</th><th>{{C3}}</th><th>{{c4}}</th><th>{{c5}}</th><th>{{c6}}</th><th>{{c7}}</th><th>{{c8}}</th><th>{{c9}}</th><th>Total</th>\r\n</tr>\r\n<tr><td>Par</td><td>{{p1}}</td><td>{{p2}}</td><td>{{p3}}</td><td>{{p4}}</td><td>{{p5}}</td><td>{{p6}}</td><td>{{p7}}</td><td>{{p8}}</td><td>{{p9}}</td><td>{{p_tot}}</td>
+		","
+			<tr class='record {{name}} {{course}}'>\r\n<td>{{name}}</td>{{date}}</td><td>{{course}}</td><td>{{score_1}}</td><td>{{score_2}}</td><td>{{score_3}}</td><td>{{score_4}}</td><td>{{score_5}}</td><td>{{score_6}}</td><td>{{score_7}}</td><td>{{score_8}}</td><td>{{score_9}}</td><td>{{total}}</td>\r\n</tr>\r\n
+		","
+			</table>
+		"],
+	display_course : function (date,course,overpar) {
+
+		if (overpar === 1) {
+
+		} else {
 
 		}
+	},
+	display_player : function () {
+
+	},
+	display_recent : function () {
+
 	},
 	blank_score : function () {
 
@@ -102,7 +117,7 @@ var dg = {
 	data: {
 		//[date,course_id,player, scores,mode] 
 		// mode 0 = over par, mode 1 = actual score
-		
+
 		// 2014 December
 		[2014.12.12,"eaglepointe","kendall",[0,-1,1,0,0,0,0,0,-1],0],
 		[2014.12.12,"eaglepointe","stuart",[1,-1,0,0,0,0,1,1,0],0],
