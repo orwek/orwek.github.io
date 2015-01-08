@@ -93,6 +93,7 @@ var dg = {
 		}
 		$("#dg_players").html(players);
 		// write all rows
+
 		if (overpar === 1) {
 			// add par
 		} else {
@@ -100,10 +101,11 @@ var dg = {
 
 			// course loop
 			for (i in dg.courses) {
+				output += tpl[0];
 				tmp_scores = dg.tpl[2];
 
 				// holes 1-9
-				if (dg.courrses[i][3] === 0){
+				if (dg.courses[i][3] === 0){
 					for (j =1; j <10; j +=1){
 						tmp_scores = tmp_scores.replace("{{c"+j+"}}", j);
 						tmp_scores = tmp_scores.replace("{{p"+j+"}}", dg.courses[2][j-1]);
@@ -111,11 +113,11 @@ var dg = {
 				}
 
 				// holes 10-18
-				if (dg.courrses[i][3] === 1){
+				if (dg.courses[i][3] === 1){
 				}
 
 				// other holes
-				if (dg.courrses[i][3] .length > 1){
+				if (dg.courses[i][3] .length > 1){
 
 				}
 				
@@ -125,6 +127,7 @@ var dg = {
 
 					}
 				}
+				output += tpl[2]
 			}
 			// write to page
 			$("#dg_scores").html(output);
@@ -159,7 +162,7 @@ var dg = {
 		mccowin : ["McCowin Park","Ammon, ID",[3],[0]],
 		rexburg : ["Nature Park","Rexburg, ID",[3,3,3,4,3,3,3,3,3],[0]],
 		eaglepointe : ["Eagle Pointe Park","Ammon, ID",[3],["R/Y","R/B","R/R","Y/B","Y/R","Y/Y","B/R","B/Y","B/B"]],
-		peterson : ["Peterson Park","Ammon, ID",[3],["B/W","B/B","B/R","W/R","W/W","W/B","R/B","R/R","R/W"]],
+		peterson : ["Peterson Park","Ammon, ID",[3],["B/W","B/B","B/R","W/W","W/R","W/B","R/B","R/R","R/W"]],
 		woodlandhills : ["Woodland Hills Park","Ammon, ID",[3],[0]]
 	},
 	players : {
