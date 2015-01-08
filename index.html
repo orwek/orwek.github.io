@@ -109,6 +109,7 @@ var dg = {
 					for (j =1; j <10; j +=1){
 						var tmp_hole ="{{c"+j+"}}",
 						tmp_par = "{{p"+j+"}}";
+						console.log(tmp_hole);
 						tmp_scores = tmp_scores.replace(tmp_hole, j);
 						tmp_scores = tmp_scores.replace(tmp_par, dg.courses[i][2][j-1]);
 					}
