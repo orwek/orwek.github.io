@@ -105,7 +105,7 @@ var dg = {
 				tmp_scores = dg.tpl[2];
 
 				// holes 1-9
-				if (dg.courses[i][3] === 0){
+				if (dg.courses[i][3][0] === 0){
 					for (j =1; j <10; j +=1){
 						var tmp_hole ="{{c"+j+"}}",
 						tmp_par = "{{p"+j+"}}";
@@ -116,11 +116,11 @@ var dg = {
 				}
 
 				// holes 10-18
-				if (dg.courses[i][3] === 1){
+				if (dg.courses[i][3][0] === 1){
 				}
 
 				// other holes
-				if (dg.courses[i][3] .length > 1){
+				if (dg.courses[i][3][0].length > 1){
 
 				}
 				
