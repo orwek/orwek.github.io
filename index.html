@@ -101,7 +101,7 @@ var dg = {
 
 			// course loop
 			for (i in dg.courses) {
-				output += tpl[0];
+				output += dg.tpl[0];
 				tmp_scores = dg.tpl[2];
 
 				// holes 1-9
@@ -127,7 +127,7 @@ var dg = {
 
 					}
 				}
-				output += tpl[2]
+				output += dg.tpl[2]
 			}
 			// write to page
 			$("#dg_scores").html(output);
