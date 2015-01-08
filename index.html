@@ -105,7 +105,13 @@ var dg = {
 		tmp_scores = "",
 		output = "";
 		for ( i in dg.players) {
-			tmp_players =dg.tpl[3].replace("{{player}}",i);
+			var tmp_player = "";
+			if ( i === "all") {
+				tmp_player = "record";
+			} else {
+				tmp_player = i;
+			}
+			tmp_players =dg.tpl[3].replace("{{player}}",tmp_player);
 			tmp_players = tmp_players.replace("{{player_display}}",  dg.players[i]);
 			players += tmp_players;
 		}
