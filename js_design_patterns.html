@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content= "width=device-width,initial-scale=1.0" />
+<title>Javascript Design Patterns</title>
+<!-- -->
+<!-- Written By: Kendall Purser for Kyäni Inc. -->
+<!-- Date: 09/25/12 -->
+<!-- -->
+
+<style type="text/css">
+
+</style>
+
+</head>
+<body>
+
+
+
+    <!-- JavaScript -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+    		var app = {
+    			// Factory Pattern
+    			make_gladiator : function (name, attack, defense, hp) {
+    				return {
+    					name: name,
+    					attack: attack,
+    					defense: defense,
+    					hp: hp,
+    					say_name : function () {
+    						console.log("Hello, my name is " + this.name);
+    					}
+    				}
+    			},
+    			factory_init : function () {
+    				var bob = app.make_gladiator("Bob",10,12,10);
+    				var larry = app.make_gladiator("Larry",10,12,10);
+    			}
+    		}
+
+    		
+    </script>
+</body>
+</html>
