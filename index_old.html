@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<title>Github:Orwek</title>
+
+<style type="text/css">
+	body {
+		margin: 0;
+		padding: 1%;
+	}
+
+	.center {
+		position: relative;
+		width: 90%;
+		background-color: #ffffff;
+		margin: 0px 5%;
+	}
+
+	div {
+		border-radius: 5px;
+		background-color: #e7e7e7;
+		margin: 1%;
+		padding: 0.25% 1.5%;
+		float: left;
+	}
+
+	.btn {
+		border-radius: 5px;
+		color: #ffffff;
+		background-color: #93c47d;
+		border: 1px solid #ababab;
+		cursor: pointer;
+	}
+
+	th, td{
+		width: 7.5%;
+		text-align: center;
+		border: 1px solid #000000;
+		padding: 3px 5px;
+	}
+
+	th {
+		background-color: #93c47d;
+		color: #ffffff;
+	}
+
+	table {
+		border: 1px solid #000000;
+		margin-bottom: 20px;
+		border-collapse:collapse;
+	}
+
+	h2 {
+		margin: 10px;
+	}
+	
+</style>
+
+</head>
+<body>
+<div class="center">
+
+<div>
+  <h1>Orwek</h1>
+</div>
+<br style="clear:both;" />
+<div style="width: 30%">
+  <h3>Projects</h3>
+  <p>
+    <a href="http://github.com/orwek/5x/" target="_blank">5x</a><br />
+    <a href="http://github.com/orwek/andi/" target="_blank">andi</a><br />
+    <a href="http://github.com/orwek/cia.js/" target="_blank">cia.js</a><br />
+    <a href="http://orwek.github.io/scripturematch/" target="_blank">Scripture Matching</a>
+
+  </p>
+</div>
+	<div style="width: 55%">
+		<h3>Disc Golf Scores</h3>
+		<div id="dg_courses" style="width: 90%">
+		</div>
+		<div id="dg_players" style="width: 90%">
+		</div>
+		<div id="dg_scores" style="width: 90%">
+		</div>
+		<div style="width: 90%">
+			<h3>Blank Scorecards</h3>
+			<p>
+				<a href="PDF/Eagle Pointe Park (9-3)- Ammon, ID.pdf" target="_blank">Eagle Pointe Park (Ammon)</a><br />
+				<a href="PDF/McCowin Park (9)- Ammon, ID.pdf" target="_blank">McCowin Park (Ammon)</a><br />
+				<a href="PDF/Nature Park (9)- Rexburg, ID.pdf" target="_blank">Nature Park (Rexburg)</a><br />
+				<a href="PDF/Peterson Park (9-3)- Ammon, ID.pdf" target="_blank">Peterson Park (Ammon)</a><br />
+				<a href="PDF/Woodland Hills (9)- Ammon, ID.pdf" target="_blank">Woodland Hills Park (Ammon)</a><br />
+			</p>
+		</div>
+	</div>
+
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+
+var dg = {
+	score_mode : 0, 
+	// 0= overpar, 
+	// 1= actual score (add par)
+	init : function (overpar) {
+		// player buttons
+		var players = "<h2>Players</h2>",
+		courses = "<h2>Courses</h2>",
+		tmp_players = "",
+		scores = dg.tpl[1],
+		tmp_scores = "",
+		output = "";
+
+		// Course buttons
+		for ( i in dg.courses) {
+			var tmp_course = "";
+			if ( i === "all") {
+				tmp_course = "course";
+			} else {
+				tmp_course = i;
+			}
+			tmp_course =dg.tpl[4].replace("{{course}}",tmp_course);
+			tmp_course = tmp_course.replace("{{course_display}}",  dg.courses[i][0]);
+			courses += tmp_course;
+		}
+		$("#dg_courses").html(courses);
+
+		// Player buttons
+		for ( i in dg.players) {
+			var tmp_player = "";
+			if ( i === "all") {
+				tmp_player = "record";
+			} else {
+				tmp_player = i;
+			}
+			tmp_players =dg.tpl[3].replace("{{player}}",tmp_player);
+			tmp_players = tmp_players.replace("{{player_display}}",  dg.players[i]);
+			players += tmp_players;
+		}
+		$("#dg_players").html(players);
+
+		// Write all scores divided into courses
+
+		// course loop
+		for (i in dg.courses) {
+			if (i !== "all"){
+				tmp_scores = dg.tpl[0].replace("{{course}}", i);
+				tmp_scores = tmp_scores.replace("{{course}}", dg.courses[i][0]);
+
+				// holes 1-9
+				if (dg.courses[i][3][0] === 0){
+					for (j =1; j <10; j +=1){
+						var tmp_hole ="{{c"+j+"}}",
+						tmp_par = "{{p"+j+"}}";
+						tmp_scores = tmp_scores.replace(tmp_hole, j);
+						tmp_scores = tmp_scores.replace(tmp_par, dg.courses[i][2][j-1]);
+						tmp_scores = tmp_scores.replace("{{p_tot}}",dg.tot(dg.courses[i][2]));
+					}
+				}
+
+				// holes 10-18
+				if (dg.courses[i][3][0] === 1){
+					for (j =1; j <10; j +=1){
+						var tmp_hole ="{{c"+j+"}}",
+						tmp_par = "{{p"+j+"}}";
+						tmp_scores = tmp_scores.replace(tmp_hole, j+9);
+						tmp_scores = tmp_scores.replace(tmp_par, dg.courses[i][2][j-1]);
+						tmp_scores = tmp_scores.replace("{{p_tot}}",dg.tot(dg.courses[i][2]));
+					}
+				}
+
+				// other holes
+				if (dg.courses[i][3][0].length > 1){
+					for (j =1; j < dg.courses[i][3].length+1; j +=1){
+						var tmp_hole ="{{c"+j+"}}",
+						tmp_par = "{{p"+j+"}}";
+						tmp_scores = tmp_scores.replace(tmp_hole, dg.courses[i][3][j-1]);
+						tmp_scores = tmp_scores.replace(tmp_par, dg.courses[i][2][j-1]);
+						tmp_scores = tmp_scores.replace("{{p_tot}}",dg.tot(dg.courses[i][2]));
+					}
+				}
+				output += tmp_scores;
+
+				if (overpar === 1) {
+					// add par
+				} else {
+					//scores loop
+					for (j =0; j < dg.data.length; j +=1) {
+						if (dg.data[j][1] === i) {
+							var tmp_row = dg.tpl[1];
+							tmp_row = tmp_row.replace("{{itteration}}","row_" + j);
+							tmp_row = tmp_row.replace("{{name}}",dg.data[j][2]);
+							tmp_row = tmp_row.replace("{{name_1}}",dg.players[dg.data[j][2]]);
+							tmp_row = tmp_row.replace("{{date}}",dg.data[j][0]);
+							tmp_row = tmp_row.replace("{{course}}",dg.courses[dg.data[j][1]][0]);
+							tmp_row = tmp_row.replace("{{total}}",dg.tot(dg.data[j][3]));
+
+							//enter scores
+							for (k = 1; k < dg.data[j][3].length + 1; k +=1){
+								tmp_row = tmp_row.replace("{{score_" + k + "}}",dg.data[j][3][k-1]);
+							}
+							output += tmp_row;
+						}
+						
+					}
+				}
+				output += dg.tpl[2]
+			}
+			// write to page
+			$("#dg_scores").html(output);
+		}
+	},
+	tpl : ["<div class='course {{course}}'><h2 style='text-align: center;'>{{course}}</h2><table id='scores'>\r\n<tr>\r\n<th>Player</th>\r\n<th>Date</th>\r\n<th>Course</th>\r\n<th>{{c1}}</th>\r\n<th>{{c2}}</th><th>{{c3}}</th><th>{{c4}}</th><th>{{c5}}</th><th>{{c6}}</th><th>{{c7}}</th><th>{{c8}}</th><th>{{c9}}</th><th>Total</th>\r\n</tr>\r\n<tr><td colspan='3'>Par</td><td>{{p1}}</td><td>{{p2}}</td><td>{{p3}}</td><td>{{p4}}</td><td>{{p5}}</td><td>{{p6}}</td><td>{{p7}}</td><td>{{p8}}</td><td>{{p9}}</td><td>{{p_tot}}</td>",
+		"<tr id='row{{itteration}}' class='record {{name}}'>\r\n<td>{{name_1}}</td><td>{{date}}</td><td>{{course}}</td><td>{{score_1}}</td><td>{{score_2}}</td><td>{{score_3}}</td><td>{{score_4}}</td><td>{{score_5}}</td><td>{{score_6}}</td><td>{{score_7}}</td><td>{{score_8}}</td><td>{{score_9}}</td><td>{{total}}</td>\r\n</tr>\r\n",
+		"</table></div>",
+		"<div class='btn' onclick='dg.display_player(\"{{player}}\")'>{{player_display}}</div>",
+		"<div class='btn' onclick='dg.display_course(\"{{course}}\")'>{{course_display}}</div>"
+	],
+	tot : function (what) {
+		var total = 0;
+		for (k =0; k < what.length; k +=1) {
+			total += what[k]
+		}
+		return total;
+
+	},
+	display_all : function () {
+		$(".record").show();
+	},
+	display_course : function (course) {
+		$(".course").hide();
+		$("."+course).show();
+	},
+	display_player : function (player) {
+		$(".record").hide();
+		$("."+player).show();
+	},
+	display_recent : function () {
+
+	},
+	blank_score : function () {
+
+	},
+	courses : {
+		// course_id : [display,city,[par],[holes]] if par length =1 all holes are the same par, holes 0 = 1-9, 1 = 10-18, other:(r/r,r/w,r/b, etc....)
+		freeman_f : ["Freeman Park Front 9","Idaho Falls, ID",[3,3,3,3,3,3,3,3,4],[0]],
+		freeman_b : ["Freeman Park Back 9","Idaho Falls, ID",[4,3,3,3,4,4,3,3,3],[1]],
+		mccowin : ["McCowin Park","Ammon, ID",[3,3,3,3,3,3,3,3,3],[0]],
+		rexburg : ["Nature Park","Rexburg, ID",[3,3,3,4,3,3,3,3,3],[0]],
+		eaglepointe : ["Eagle Pointe Park","Ammon, ID",[3,3,3,3,3,3,3,3,3],["R/Y","R/B","R/R","Y/B","Y/R","Y/Y","B/R","B/Y","B/B"]],
+		peterson : ["Peterson Park","Ammon, ID",[3,3,3,3,3,3,3,3,3],["B/W","B/B","B/R","W/W","W/R","W/B","R/B","R/R","R/W"]],
+		woodlandhills : ["Woodland Hills Park","Ammon, ID",[3,3,3,3,3,3,3,3,3],[0]],
+		all : ["All"]
+	},
+	players : {
+		// generated on init [name,favorite course,average_9,last played]
+		kendall : ["Kendall"],
+		stuart : ["Stuart"],
+		trevor : ["Trevor"],
+		abigail : ["Abigail"],
+		abinadi : ["Abinadi"],
+		caspian : ["Caspian"],
+		blake : ["Blake"],
+		all : ["All"]
+	},
+	data : [
+		//[date,course_id,player, scores,mode] 
+		// mode 0 = over par, mode 1 = actual score
+
+		// 2015 March
+		["2015.03.05","freeman_b","kendall",[1,2,0,1,1,2,0,2,1],0],
+		["2015.03.05","freeman_b","stuart",[0,1,1,1,2,2,1,2,0],0],
+
+		// 2015 February
+		["2015.02.26","freeman_b","kendall",[1,0,-1,0,0,0,1,0,0],0],
+		["2015.02.26","freeman_b","stuart",[-1,1,1,1,0,2,0,0,0],0],
+		["2015.02.12","freeman_b","kendall",[-1,0,0,5,-1,0,1,0,1],0],
+		["2015.02.12","freeman_b","stuart",[0,0,0,1,0,1,0,1,0],0],
+		["2015.02.05","freeman_b","kendall",[0,1,1,0,0,2,1,1,1],0],
+
+		// 2014 December
+		["2014.12.22","peterson","kendall",[0,0,0,0,1,0,0,1,0],0],
+		["2014.12.22","peterson","stuart",[2,0,1,0,1,0,0,0,1],0],
+		["2014.12.12","eaglepointe","kendall",[0,-1,1,0,0,0,0,0,-1],0],
+		["2014.12.12","eaglepointe","stuart",[1,-1,0,0,0,0,1,1,0],0],
+		["2014.12.11","freeman_f","kendall",[-1,1,1,1,1,2,0,1,1],0],
+		["2014.12.11","freeman_f","stuart",[0,1,2,1,0,3,0,1,1],0],
+		["2014.12.10","eaglepointe","kendall",[0,0,1,0,0,0,-1,0,-1],0],
+		["2014.12.9","freeman_b","kendall",[-1,0,1,1,0,0,1,1,0],0],
+		["2014.12.9","freeman_b","stuart",[-1,0,1,1,0,0,1,1,0],0],
+		["2014.12.8","freeman_b","kendall",[-1,1,0,2,1,1,0,0,1],0],
+		["2014.12.8","freeman_b","stuart",[0,0,1,2,2,0,0,0,0],0],
+		["2014.12.6","rexburg","kendall",[0,1,1,2,0,0,0,0,0],0],
+		["2014.12.6","rexburg","abigail",[4,4,3,5,0,0,0,0,0],0],
+		["2014.12.6","rexburg","abinadi",[3,5,4,12,0,0,0,0,0],0],
+		["2014.12.6","rexburg","caspian",[6,5,7,8,0,0,0,0,0],0],
+		["2014.12.5","freeman_b","kendall",[-1,1,0,2,0,1,1,1,0],0],
+		["2014.12.5","freeman_b","stuart",[-1,0,0,1,0,2,0,0,0],0],
+		["2014.12.4","freeman_f","kendall",[0,1,2,1,1,3,1,4,1],0],
+		["2014.12.2","freeman_b","kendall",[-1,0,-1,1,0,1,0,1,1],0],
+		["2014.12.2","freeman_b","stuart",[-1,1,1,0,0,1,0,1,1],0],
+		["2014.12.1","freeman_b","kendall",[-1,2,1,0,0,1,0,1,0],0],
+
+		// 2014 November
+		["2014.11.10","freeman_b","kendall",[0,1,-1,3,0,2,2,2,0],0],
+		["2014.11.10","freeman_b","stuart",[0,1,0,2,0,0,1,1,1],0],
+		
+		// 2014 October
+		["2014.10.29","freeman_f","kendall",[2,2,0,2,0,2,1,1,1],0],
+		["2014.10.29","freeman_f","trevor",[0,1,1,1,1,0,1,1,0],0],
+		["2014.10.28","freeman_b","kendall",[-1,1,0,1,2,1,2,1,2],0],
+		["2014.10.27","freeman_b","kendall",[0,1,0,0,1,2,0,0,1],0],
+		["2014.10.27","freeman_b","stuart",[1,1,0,1,2,1,-1,1,0],0],
+		["2014.10.27","freeman_b","trevor",[0,0,0,0,1,1,0,0,0],0],
+		["2014.10.24","freeman_f","kendall",[2,2,0,1,1,2,2,0,1],0],
+		["2014.10.24","freeman_f","stuart",[1,1,1,2,1,1,3,2,1],0],
+		["2014.10.23","freeman_b","kendall",[1,1,0,0,2,1,0,0,0],0],
+		["2014.10.23","freeman_b","stuart",[1,1,0,1,2,3,1,2,1],0],
+		["2014.10.23","freeman_b","trevor",[1,1,0,2,2,1,2,1,2],0],
+		["2014.10.23","freeman_b","blake",[1,1,0,1,1,0,-1,1,0],0],
+		["2014.10.20","freeman_f","kendall",[2,1,0,1,2,1,1,1,2],0],
+		["2014.10.20","freeman_f","stuart",[1,1,1,2,1,1,1,1,2],0],
+		["2014.10.20","freeman_f","trevor",[1,1,0,0,1,1,1,0,0],0],
+		["2014.10.20","freeman_b","kendall",[0,0,1,0,1,3,0,2,2],0],
+		["2014.10.20","freeman_b","trevor",[1,1,0,2,2,0,1,1,0],0],
+		["2014.10.18","mccowin","kendall",[0,-1,1,0,0,0,1,0,1],0],
+		["2014.10.18","mccowin","abinadi",[3,1,10,6,3,2,2,2,2],0],
+		["2014.10.18","mccowin","caspian",[4,2,5,4,4,3,5,4,3],0],
+		["2014.10.17","freeman_b","kendall",[1,0,0,1,1,2,-1,1,1],0],
+		["2014.10.16","freeman_b","kendall",[0,1,1,1,2,1,1,3,0],0]
+	]
+};
+
+dg.init();
+
+</script>
+
+</body>
+</html>
