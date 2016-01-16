@@ -18,7 +18,8 @@
     <![endif]-->
 
     <style type="text/css">
-
+      /* Extra small devices (phones, less than 768px) */
+      /* No media query since this is the default in Bootstrap */
       #nav_1 {
         color: #ffffff;
         background-color: #339933;
@@ -53,7 +54,7 @@
         clear: both;
       }
 
-      #main div {
+      .page {
         margin: 0px auto;
         width: 1000px;
         display: none;
@@ -83,6 +84,8 @@
         text-align: center;
         padding: 10px;
       }
+      
+      
 
     </style>
 
@@ -100,71 +103,71 @@
     </div>
   </div>
 
-  <div id="main">
-  
-    <!-- Home -->
-    <div id="home" class="page">
-      <h1>Kendall Purser</h1>
-      <p>
-        This is who I am.
-      </p>
-      <hr />
-    </div>
+  <div id="main" class="container">
+    <div class="row">
+      <!-- Home -->
+      <div id="home" class="page">
+        <h1>Kendall Purser</h1>
+        <p>
+          This is who I am.
+        </p>
+        <hr />
+      </div>
 
-    <!-- Graphic Artist -->
-    <div id="graphic_artist" class="page">
-      <h1>Graphic Artist</h1>
-      <p>
-        From paintbrush to digital art I have done it all!
-      </p>
-      <hr />
-    </div>
+      <!-- Graphic Artist -->
+      <div id="graphic_artist" class="page">
+        <h1>Graphic Artist</h1>
+        <p>
+          From paintbrush to digital art I have done it all!
+        </p>
+        <hr />
+      </div>
 
-    <!-- Web Developer -->
-    <div id="web_developer" class="page">
-      <h1>Web Developer</h1>
-      <p>
-        Look at this website!
-      </p>
-      <hr />
-    </div>
+      <!-- Web Developer -->
+      <div id="web_developer" class="page">
+        <h1>Web Developer</h1>
+        <p>
+          Look at this website!
+        </p>
+        <hr />
+      </div>
 
-    <!-- Javascript -->
-    <div id="js_games" class="page">
-      <h1>JavaScript</h1>
-      <p>
-        These games are fun!
-      </p>
-      <hr />
-    </div>
+      <!-- Javascript -->
+      <div id="js_games" class="page">
+        <h1>JavaScript</h1>
+        <p>
+          These games are fun!
+        </p>
+        <hr />
+      </div>
 
-    <!-- Author -->
-    <div id="author" class="page">
-      <h1>Author</h1>
-      <p>
-        I write books!
-      </p>
-      <hr />
-    </div>
+      <!-- Author -->
+      <div id="author" class="page">
+        <h1>Author</h1>
+        <p>
+          I write books!
+        </p>
+        <hr />
+      </div>
 
-    <!-- Youtube -->
-    <div id="youtube" class="page">
-      <h1>YouTube</h1>
-      <p>
-        I make videos!
-      </p>
-      <hr />
-    </div>  
+      <!-- Youtube -->
+      <div id="youtube" class="page">
+        <h1>YouTube</h1>
+        <p>
+          I make videos!
+        </p>
+        <hr />
+      </div>  
 
-    <!-- Disc Golf -->
-    <div id="disc_golf" class="page">
-      <h1>Disc Golf</h1>
-      <p>
-        Look at these scores!
-      </p>
-      <hr />
-    </div>
-
+      <!-- Disc Golf -->
+      <div id="disc_golf" class="page">
+        <h1>Disc Golf</h1>
+        <p>
+          Look at these scores!
+        </p>
+        <hr />
+      </div>
+    </div><!-- row -->
   </div>
 
   <div id="footer">
@@ -180,28 +183,40 @@
 
     var app = {
       init : function () {
+        app.nav();
+      },
+      nav : function () {
         var hash;
         if (location.hash !== "") {
           console.log("yes hash: " + location.hash);
           hash = location.hash;
         } else {
           hash = "#home";
-          console.log("no hash")
+          console.log("no hash: " + location.hash);
         }
         app.navigate(hash);
       },
       navigate : function (hash2) {
+        var hash;
+        if (location.hash !== "") {
+          console.log("yes hash: " + location.hash);
+          hash = location.hash;
+          
+        } else {
+          hash = "#home";
+          console.log("no hash: " + location.hash);
+          app.navigate(hash);
+        }
         // controls navigation
         location.hash = hash2;
         $(".page").hide();
         $(hash2).show();
-        app.scroll_up();
       },
-      scroll_up : function () {
-        window.scrollBy(0,-100);
+      nav_toggle : function () {
+
       }
-    }
-    app.init("#home");
+    };
+    app.init();
     
     </script>
   </body>
