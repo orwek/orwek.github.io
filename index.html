@@ -85,12 +85,15 @@
 		<div class="cell cell50">
 			<h3>Graphic Artist</h3>
 			<p>
-			  I am an art enthusiast! This stems from my degree as a Techincal Theater major. I love to design things be it webpages or lighting plots! My favorite mediums are acrylic, digital, and watercolor (though I'm still learning the finer points of watercolor).
+			  I am an art enthusiast! This stems from my degree as a Techincal Theater major. I love to design things be it webpages, a book case, or lighting plots! My favorite mediums are acrylic, digital painting, and watercolor. 
+			</p>
+			<p>
+			  I have also been known to break out my Cannon DSLR and have some fun with light painting, videography, and image editing.
 			</p>
 			
 		</div>
-		<div class="cell cell50">
-			<img src="img/logo.png" class="center drop_light" style="width: 150px;" />
+		<div class="cell cell50" style="height: 300px;">
+			<img id=gallery src="img/logo.png" class="center drop_light" style="width: 200px; margin: auto;" />
 		</div>
 		<hr />
 	</div>
@@ -159,8 +162,46 @@ var app = {
 		a.menu_toggle();
 		document.location = document.location.pathname + hash;
 
+	},
+	slides : function () {
+		var input = [
+			// tall
+			"03-game_01.png",			
+			"09-photo_03.jpg",			
+			"2009.09-Mountain Path.jpg",			
+			"2014.05.13-Taylor Mountain.jpg",
+			// wide
+			"04-comic_01.png",
+			"10-photo_01.jpg",
+			"2012.07.21_BrownstoneChurch_Watercolor.jpg"
+		],
+		wide = [0,0,0,0,1,1,1]
+		delay = 3000,
+		current = 0,
+		t = 0;
+
+		// Set first image
+		a.get("gallery").src = "img/" + input[current];
+		
+		// Start rotation
+		t = setInterval(function(){
+			
+			if (wide[current] == 1) {
+				a.css("gallery",{"width":"300px"});
+			} else {
+				a.css("gallery",{"width":"200px"});
+			}
+			a.get("gallery").src = "img/" + input[current];
+			current +=1;
+			if (current > input.length-1) {
+				current =0
+			}
+		}, delay);
+
 	}
-}
+};
+
+app.slides();
 </script>
 </body>
 </html>
