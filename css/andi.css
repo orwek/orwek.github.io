@@ -18,12 +18,17 @@ body {
 	color: #ffffff;
 	background-color: #339933;
 	padding: 5px;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
 }
 
 .nav a, .footer a {
 	margin: 0px 10px;
 	text-decoration: none;
 	color: #ffffff;
+	cursor: pointer;
 }
 
 #links {
@@ -159,7 +164,7 @@ hr {
 
 
 /* bigger than a phone */
-@media all and (min-width: 450px) {
+@media all and (min-width: 840px) {
 	#links {
 		display: block !important;
 		float: right;

@@ -18,12 +18,12 @@
 			<a onclick="a.menu_toggle();" class="show_phone" style="float:right; cursor:pointer;">
 				X
 			</a>
-			<a href="#web_developer">Web Developer</a>
-			<a href="#js_games">JavaScript</a>
-			<a href="#graphic_artist">Graphic Artist</a>
-			<a href="#author">Author</a>
-			<a href="#youtube">YouTube</a>
-			<a href="#disc_golf">Disc Golf</a>
+			<a onclick="app.nav('#web_developer');">Web Developer</a>
+			<a onclick="app.nav('#js_games');">JavaScript</a>
+			<a onclick="app.nav('#graphic_artist');">Graphic Artist</a>
+			<a onclick="app.nav('#author');">Author</a>
+			<a onclick="app.nav('#youtube');">YouTube</a>
+			<a onclick="app.nav('#disc_golf');">Disc Golf</a>
 		</div>
 		<div id="menu" onclick="a.menu_toggle();" class="show_phone">
 			<hr />
@@ -32,8 +32,9 @@
 		</div>
 	</div>
 	<!-- write web app here -->
-	<div class="row">
-		<div name="web_developer" class="cell cell50">
+	<a name ="web_developer"></a>
+	<div class="row">		
+		<div class="cell cell50">
 			<h3>Web Developer</h3>
 			<p>
 			  I have eight years of experience as a web developer. I have worked with content management systems, publishing systems, and responsive design. I am fluent in the following languages and frameworks: HTML, CSS, JavaScript, jQuery, JSON, Bootstrap, Skeleton, Node.js, PHP, and MySQL.
@@ -51,24 +52,40 @@
 		</div>
 		<hr />
 	</div>
+	<a name ="js_games"></a>
 	<div class="row">
-		<div name="js_games" class="cell cell50">
+		<div class="cell cell50">
+
 			<h3>JavaScript</h3>
 			<p>
-			  From paintbrush to digital art I have done it all!
+				My passion for JavaScript probably stems from owning a low end smartphone. After being denied the third or fourth time I tried to install a certain app because of the limited memory, I started writing web apps that could run on smart phones. The first of these was a simple dice rolling app. From there I started writing games in JavaScript, and the rest as they say is history.
 			</p>
+			<p>
+				The thing I love the most about writing games is that it gives me the opportunity to explore parts of a programming language that I don't normally get to use in day to day programming. Much of what I learn can then be brought back to work because I have delved into an area that I normally wouldn't have touched and it makes me a better programmer.
+			</p>
+			
+			
 			
 		</div>
 		<div class="cell cell50">
-			<img src="img/logo.png" class="center drop_light" style="width: 150px;" />
+			<p>
+				Here are some samples of my JavaScript Games:
+			</p>
+			<p>
+				<a href="http://orwek.github.io/5x/d6roller.html" target="_blank" class="btn drop_dark" style="clear:both;">d6 Dice Roller</a>
+				<a href="http://orwek.github.io/cia.js" target="_blank" class="btn drop_dark" style="clear:both;">CIA Text Adventure</a>
+				<a href="http://orwek.github.io/scripturematch" target="_blank" class="btn drop_dark" style="clear:both;">Matching Game</a>
+				
+			</p>
 		</div>
 		<hr />
 	</div>
+	<a name ="graphic_artist"></a>
 	<div class="row">
-		<div name="graphic_artist" class="cell cell50">
+		<div class="cell cell50">
 			<h3>Graphic Artist</h3>
 			<p>
-			  From paintbrush to digital art I have done it all!
+			  I am an art enthusiast! This stems from my degree as a Techincal Theater major. I love to design things be it webpages or lighting plots! My favorite mediums are acrylic, digital, and watercolor (though I'm still learning the finer points of watercolor).
 			</p>
 			
 		</div>
@@ -77,11 +94,12 @@
 		</div>
 		<hr />
 	</div>
+	<a name ="author"></a>
 	<div class="row">
-		<div name="author" class="cell cell50">
+		<div class="cell cell50">
 			<h3>Author</h3>
 			<p>
-			  Check out my books!
+			  As an independant author I have self-published two books and three eBooks. I have always loved writing, especially in the fantasy genre! You can find my books on Amazon in paperback and Kindle editions, as well as on the Nook store.
 			</p>
 			
 		</div>
@@ -90,8 +108,9 @@
 		</div>
 		<hr />
 	</div>
+	<a name ="youtube"></a>
 	<div class="row">
-		<div name="youtube" class="cell cell50">
+		<div class="cell cell50">
 			<h3>YouTube</h3>
 			<p>
 			  From paintbrush to digital art I have done it all!
@@ -103,8 +122,9 @@
 		</div>
 		<hr />
 	</div>
+	<a name ="disc_golf"></a>
 	<div class="row">
-		<div name="disc_golf" class="cell cell50">
+		<div class="cell cell50">
 			<h3>Disc Golf</h3>
 			<p>
 			  Here are some scores from last year!
@@ -126,6 +146,14 @@
 <script src="js/andi.js"></script>
 <script>
 
+var app = {
+	nav : function (hash) {
+		// grab url and add the hash
+		a.menu_toggle();
+		document.location = document.location.pathname + hash;
+
+	}
+}
 </script>
 </body>
 </html>
