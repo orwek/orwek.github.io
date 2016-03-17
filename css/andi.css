@@ -164,7 +164,7 @@ hr {
 
 
 /* bigger than a phone */
-@media all and (min-width: 840px) {
+@media all and (min-width: 810px) {
 	#links {
 		display: block !important;
 		float: right;
@@ -176,6 +176,7 @@ hr {
 
 	#links a {
 		display: inline;
+		font-size: 15px;
 	}
 
 	.show_phone {
@@ -226,6 +227,11 @@ hr {
 	}
 }
 @media all and (min-width: 1000px)  {
+	#links a {
+		display: inline;
+		font-size: 20px;
+	}
+
 	.row {
 		width: 1000px;
 		clear: both;
