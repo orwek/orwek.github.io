@@ -1,0 +1,233 @@
+/*
+	andi 0.2 - mobile dev toolkit
+	Written by Kendall Purser
+	2015.03.04
+	2016.02.11 (edit)
+*/
+
+/* Default styles (phone) */
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+.nav {
+	width: auto;
+	height: 25px;
+	font-size: 20px;
+	color: #ffffff;
+	background-color: #339933;
+	padding: 5px;
+}
+
+.nav a, .footer a {
+	margin: 0px 10px;
+	text-decoration: none;
+	color: #ffffff;
+}
+
+#links {
+	z-index: 100;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: #339933;
+	text-align: center;
+}
+
+#links a {
+	display: block;
+	margin: 10px;
+	clear: both;
+}
+
+#links a:hover {
+	text-decoration: underline;
+}
+
+.logo {
+	height: 25px;
+	float: left;
+}
+
+#menu {
+	float: right;
+	width: 30px;
+	padding: 5px;
+	margin-top: -5px;
+	cursor: pointer;
+}
+
+#menu hr {
+	margin: 5px 0px;
+}
+
+
+.footer {
+	clear: both;
+	width: auto;
+	height: 50px;
+	font-size: 14px;
+	color: #ffffff;
+	background-color: #339933;
+	padding: 10px;
+	text-align: center;
+}
+
+hr {
+	clear:both;
+	margin: 0px 5%;
+}
+
+
+/* grid styles */
+
+.center {
+	margin: 5% auto;
+	display: block;
+}
+
+.row {
+	width: auto;
+	clear: both;
+	margin: 3% auto;
+}
+
+.btn {
+	background-color: #e7e7e7;
+	color: #333333;
+	padding: 10px;
+	text-align: center;
+	font-size: 16px;
+	float: left;
+	margin: 10px;
+	border-radius: 10px;
+	text-decoration: none;
+	cursor: pointer;
+	
+}
+
+.btn:hover {
+	background-color: #333333;
+	color: #e7e7e7;
+}
+
+.drop_light {
+	border-bottom: 3px solid #e7e7e7;
+	border-right: 3px solid #e7e7e7;
+}
+
+.drop_dark {
+	border-bottom: 2px solid #777777;
+	border-right: 2px solid #777777;
+}
+
+.round {
+	border-radius: 10px;
+}
+
+.circle {
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.hide_phone {
+	display: none;
+}
+
+#log {
+	color: red;
+	display : none;
+	margin-top : 15px;
+	padding: 15px;
+	font-size : 30px;
+	height : 150px;
+	overflow : scroll;
+	background-color : #e7e7e7;
+	border-radius: 30px;
+}
+
+.cell, .cell25, .cell30, .cell50, .cell60, .cell75 {
+	float: none;
+	width: auto;
+	padding: 3%;
+	clear: both;
+}
+
+
+
+/* bigger than a phone */
+@media all and (min-width: 450px) {
+	#links {
+		display: block !important;
+		float: right;
+		background-color: none;
+		height: 25px;
+		width: auto;
+		position: relative;
+	}
+
+	#links a {
+		display: inline;
+	}
+
+	.show_phone {
+		display: none !important;
+	}
+
+	.hide_phone {
+		display: block;
+	}
+
+	.footer {
+		text-align: left;
+	}
+
+	.right {
+		float: right;
+		margin-right: 10px;
+	}
+
+	.row img {
+		margin-top: 10%;
+	}
+
+	.row {
+		width: auto;
+		clear: both;
+		margin: 3% auto;
+	}
+	.cell {
+		float: left;
+		padding: 3%;
+		clear: none;
+	}
+	.cell25 {
+		width: 19%;
+	}
+	.cell30 {
+		width: 24%;
+	}
+	.cell50 {
+		width: 44%;
+	}
+	.cell60 {
+		width: 54%;
+	}
+	.cell75 {
+		width: 69%;
+	}
+}
+@media all and (min-width: 1000px)  {
+	.row {
+		width: 1000px;
+		clear: both;
+		margin: 3% auto;
+	}
+
+	.row img {
+		margin-top: auto;
+	}
+}
