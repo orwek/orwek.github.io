@@ -1,6 +1,6 @@
 // andi 0.2 - mobile dev toolkit
 // Written by Kendall Purser
-// 2015.03.04
+// 2016.07.18
 
 	// ***catch browser errors and log them
 	window.onerror = function (msg, url, num, col, obj) {
@@ -38,10 +38,10 @@
 
 		// localStorage functions
 		save : function (key, value) {
-			localStorage.setItem(key) = value;
+			localStorage.setItem(key, JSON.stringify(value));
 		},
 		read : function (key) {
-			return localStorage.getItem(key);
+			return JSON.parse(localStorage.getItem(key));
 		},
 		clear : function (key) {
 			localStorage.removeItem(key);
