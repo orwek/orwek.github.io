@@ -1,0 +1,69 @@
+<!DOCTYPE html>  
+<html>
+<head>
+	<title>Where's Max?</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="icon" href="img/favicon.png">
+	<link rel="stylesheet" href="css/andi.css" />
+</head>
+<body>
+	<div class="nav">
+		<a href="index.html">
+			<img class="logo" src="img/favicon.png" />
+			Where's Max?
+		</a>
+		<!--
+		<div id="links" class="hide_phone">
+			<a onclick="a.menu_toggle();" class="show_phone" style="float:right; cursor:pointer;">
+				X
+			</a>
+			<a href="https://github.com/orwek/andi">JavaScript API</a>
+			<a href="https://github.com/orwek/andi">CSS Styles</a>
+		</div>
+		<div id="menu" onclick="a.menu_toggle();" class="show_phone">
+			<hr />
+			<hr />
+			<hr />
+		</div>
+		-->
+	</div>
+	<!-- write web app here -->
+	<div class="row">
+		<div class="cell cell50">
+			<a href="https://www.dropbox.com/s/ar4ouqwmvjoydim/0-test.jpg?dl=0" target"_blank" style="cursor: pointer;">
+			<img src="https://photos-6.dropbox.com/t/2/AACB3bfZWlF2_X_TApTiQhLiFfn3DrcAUC7MjtI5goaPVQ/12/217403965/jpeg/32x32/1/_/1/2/0-test.jpg/EIiHzqMBGPy-AyAHKAc/xfH-CV1hQ7iNXTiFzO_89AfN8nSgIL5MnopqdvBRzYk?size=1280x960&size_mode=3" class="center drop_light" id="max" style="width: 150px;" />
+			</a>
+		
+		</div>
+		<div id="main" class="cell cell50">
+			<h3>Where's Max?</h3>
+			<p>
+				Can you spot Max the dog? He wanders through on occasion, and likes to sleep under the trapoline. This image updates every 15 seconds.
+			</p>
+			
+		</div>
+		
+		<hr />
+	</div>
+	
+	<div class="footer">
+		<a href="https://github.com/orwek/andi" target="_blank">andi framework</a>
+		<br class="show_phone" />
+		<div class="right">Copyright &copy; 2016 Kendall Purser</div>
+	</div>
+	<div id="log"></div>
+<script src="js/andi.js"></script>
+<script>
+function init () {
+	var img = document.getElementById("max");
+	var t = setInterval(function (){
+		//img.src = "https://www.dropbox.com/s/ar4ouqwmvjoydim/0-test.jpg?dl=0"
+		img.src = "https://photos-6.dropbox.com/t/2/AACB3bfZWlF2_X_TApTiQhLiFfn3DrcAUC7MjtI5goaPVQ/12/217403965/jpeg/32x32/1/_/1/2/0-test.jpg/EIiHzqMBGPy-AyAHKAc/xfH-CV1hQ7iNXTiFzO_89AfN8nSgIL5MnopqdvBRzYk?size=1280x960&size_mode=3"
+	}, 15000);
+	
+}
+
+init();
+</script>
+</body>
+</html>
